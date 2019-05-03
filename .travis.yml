@@ -1,0 +1,25 @@
+sudeo: required
+services:
+  - docker
+
+before_install:
+  - docker build -t fvtmcdocker/react-test -f ./client/Dockerfile.dev ./client
+
+#run tests here - below
+script:
+  - docker run -e CI=true fvtmcdocker/react-test npm test -- --watchAll=false
+  
+#after tests pass - run prod build
+after_success:
+  - docker build -t fvtmcdocker/multi-client ./client
+  - docker build -t fvtmcdocker/multi-nginx  ./nginx
+  - docker build -t fvtmcdocker/multi-server ./server
+  - docker build -t fvtmcdocker/multi-worker ./worker
+  #Log into the docker CLI
+  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
+
+  #Take those images and push to docker hub .... hub.docker.com
+  - docker push fvtmcdocker/multi-client
+  - docker push fvtmcdocker/multi-nginx
+  - docker push fvtmcdocker/multi-server
+  - docker push fvtmcdocker/multi-worker
