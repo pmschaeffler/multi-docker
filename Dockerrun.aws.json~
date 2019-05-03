@@ -1,0 +1,23 @@
+{
+    "AWSEBDockerrunVersion": 2,
+    "containerDefinitions": [
+	{
+	    "name": "client",
+	    "image": "fvtmcdocker/multi-client",
+	    "hostname": "client",
+	    "essential": false
+	},
+	{
+	    "name": "server",
+	    "image": "fvtmcdocker/multi-server",
+	    "hostname": "api",
+	    "essential": false
+	},
+	{
+	    "name": "worker",
+	    "image": "fvtmcdocker/multi-worker",
+	    "hostname": "worker",
+	    "essential": false
+	},	
+    ]
+}

@@ -1,0 +1,36 @@
+{
+    "AWSEBDockerrunVersion": 2,
+    "containerDefinitions": [
+	{
+	    "name": "client",
+	    "image": "fvtmcdocker/multi-client",
+	    "hostname": "client",
+	    "essential": false
+	},
+	{
+	    "name": "server",
+	    "image": "fvtmcdocker/multi-server",
+	    "hostname": "api",
+	    "essential": false
+	},
+	{
+	    "name": "worker",
+	    "image": "fvtmcdocker/multi-worker",
+	    "hostname": "worker",
+	    "essential": false
+	},
+	{
+	    "name": "nginx",
+	    "image": "fvtmcdocker/multi-nginx",
+	    "hostname": "nginx",
+	    "essential": true,
+	    "portMappings": [
+		{
+		    "hostPort": 80,
+		    "contrainerPort": 80
+		}
+	    ],
+	    "links": ["client", "server"]
+	}
+    ]
+}
