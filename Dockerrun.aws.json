@@ -5,19 +5,22 @@
 	    "name": "client",
 	    "image": "fvtmcdocker/multi-client",
 	    "hostname": "client",
-	    "essential": false
+	    "essential": false,
+	    "memory": 512
 	},
 	{
 	    "name": "server",
 	    "image": "fvtmcdocker/multi-server",
 	    "hostname": "api",
-	    "essential": false
+	    "essential": false,
+	    "memory": 512
 	},
 	{
 	    "name": "worker",
 	    "image": "fvtmcdocker/multi-worker",
 	    "hostname": "worker",
-	    "essential": false
+	    "essential": false,
+	    "memory": 512	    
 	},
 	{
 	    "name": "nginx",
@@ -30,7 +33,8 @@
 		    "contrainerPort": 80
 		}
 	    ],
-	    "links": ["client", "server"]
+	    "links": ["client", "server"],
+	    "memory": 512
 	}
     ]
 }
